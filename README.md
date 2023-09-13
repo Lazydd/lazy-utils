@@ -1,5 +1,5 @@
 # Component utils
 
 ```
-npm install --save-dev @lazy/utils
+npm install --save-dev @ddlazy/utils
 ```

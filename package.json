@@ -1,5 +1,5 @@
 {
-	"name": "@lazy/utils",
+	"name": "@ddlazy/utils",
 	"version": "0.0.2",
 	"module": "./dist/index.esm.js",
 	"type": "module",
