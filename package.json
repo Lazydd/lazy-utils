@@ -1,11 +1,15 @@
 {
 	"name": "@ddlazy/utils",
-	"version": "0.0.2",
+	"version": "0.0.5",
 	"module": "./dist/index.esm.js",
 	"type": "module",
 	"types": "./dist/types/index.d.ts",
 	"description": "",
-	"main": "./dist/index.cjs.js",
+	"main": "./dist/index.esm.js",
+	"exports": {
+		"require": "./dist/index.cjs.js",
+		"import": "./dist/index.esm.js"
+	},
 	"files": [
 		"dist"
 	],
