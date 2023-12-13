@@ -7,6 +7,29 @@ export const getWindow = () => {
 	return { width, height };
 };
 /**
+ * 返回元素在页面中位置以及宽高
+ * @param node HTML节点
+ */
+export const getOffset = (node: HTMLElement) => {
+	let detail = node.getBoundingClientRect();
+	let top =
+		detail.top +
+		(window.pageYOffset || document.documentElement.scrollTop) -
+		(document.documentElement.clientTop || 0);
+	let left =
+		detail.left +
+		(window.pageXOffset || document.documentElement.scrollLeft) -
+		(document.documentElement.clientLeft || 0);
+	let width = node.offsetWidth;
+	let height = node.offsetHeight;
+	return {
+		top,
+		left,
+		width,
+		height,
+	};
+};
+/**
  * 下载文件流
  * @param blob 二进制流
  * @param filename 文件名(默认系统时间戳)
@@ -15,11 +38,27 @@ export const download = (blob: Blob, filename?: string): void => {
 	const blobURL = window.URL.createObjectURL(blob);
 	const a = document.createElement('a');
 	a.href = blobURL;
-	a.download = filename || +new Date() + '';
+	a.download = filename ?? +new Date() + '';
 	document.body.appendChild(a);
 	a.click();
 	a.remove();
 	window.URL.revokeObjectURL(blobURL);
+};
+/**
+ *
+ * @param url 下载连接的地址
+ * @param filename 文件名(默认系统时间戳)
+ */
+export const donwloadUrl = (url: string, filename?: string) => {
+	fetch(url).then((res) => {
+		res.blob().then((blob) => {
+			const a = document.createElement('a');
+			a.href = window.URL.createObjectURL(blob);
+			a.download = filename ?? +new Date() + '';
+			a.click();
+			window.URL.revokeObjectURL(url);
+		});
+	});
 };
 /**
  * 统计字数
